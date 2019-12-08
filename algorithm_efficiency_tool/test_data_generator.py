@@ -11,7 +11,7 @@ class TestDataGenerator:
             'sort': 'asc'
         }
         if _params:
-         params.update(_params)
+            params.update(_params)
 
         if params['type'] == 'list':
             the_list = None

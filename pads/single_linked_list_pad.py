@@ -64,13 +64,9 @@ class SingleLinkedListPad(ScratchpadBase):
         if not _params:
             _params = self.data_params
 
-        params = {
-            'type': 'list',
-            'fill_with': 'unsigned',
-            'sort': 'random'
-        }
-        params.update(_params)
-        elements = self.data_generator.generate(multiplier, params)
+        if _params:
+            self.data_params.update(_params)
+        elements = self.data_generator.generate(multiplier, self.data_params)
         for value in elements:
             self.add_node(value)
 

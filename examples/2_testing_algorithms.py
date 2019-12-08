@@ -16,13 +16,12 @@
             be useful for getting an accurate result within a tolerable amount of time.
 
 '''
-from algorithm_efficiency_tool.tool_class import AlgorithmEfficiencyTool
-from algorithm_efficiency_tool.aet_decorator import aet_decorator
+from algorithm_efficiency_tool.tool_class import aet_decorator
 
-
+# single paramater algorithms: data_params = {}
 @aet_decorator(data_params={
     'type': 'str',
-    'number_of_nodes': 2000000
+    'number_of_nodes': 100000
 })
 def reverse_string(string):
     letters = list(string)
@@ -44,12 +43,27 @@ def reverse_list(_list):
         _list[len(_list) - 1 - i] = temp
     return _list
 
+# multiple parameter algorithms: data_params = [ {data for param}, {data for param} ]
+@aet_decorator(data_params=[
+    {
+        'type': 'str',
+        'number_of_nodes': 8
+    },
+    {
+        'type': 'str',
+        'number_of_nodes': 150
+    }
+])
+def print_passed_parameters(string1, string2):
+    print(f'{string1} : {string2}')
+
 
 if __name__ == '__main__':
     # both of these algorithms were tested in part one, so  we will skip testing for this.
 
     reverse_string('')  # the parameter for the algorithm can be anything. It will be replaced by the aet_decorator
     reverse_list([])    # when the algorithm is executed
+    print_passed_parameters('a','b')
 '''
     When you run these tests, you will see output to your terminal window that looks something like this:
     

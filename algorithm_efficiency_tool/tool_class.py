@@ -1,4 +1,5 @@
 import timeit
+from functools import wraps
 from algorithm_efficiency_tool.test_data_generator import TestDataGenerator
 
 
@@ -35,7 +36,9 @@ class AlgorithmEfficiencyTool:
 
         print('Populating...')
         if data_params:
-            data = self.data_generator.generate(data_multiplier, data_params)
+            data = []
+            for _params in data_params:
+                data.append(self.data_generator.generate(data_multiplier, _params))
         else:
             self.scratchpad.populate(data_multiplier)
             data = None
@@ -43,12 +46,13 @@ class AlgorithmEfficiencyTool:
         print('Testing...')
         if data:
             start = timeit.default_timer()
-            function(data)
+            function(*data)
             end=timeit.default_timer()
         else:
             start = timeit.default_timer()
             function()
             end = timeit.default_timer()
+
         return (end - start) * 1000
 
     def compare_functions(self, functions):
@@ -57,6 +61,8 @@ class AlgorithmEfficiencyTool:
             data_params = None
             if type(function) == dict:
                 data_params = function['data_params']
+                if type(data_params) is dict:
+                    data_params = [data_params]
                 function = function['function']
             results.append(self.test_function(function, data_params))
         self.print_test_results(results)
@@ -70,3 +76,15 @@ class AlgorithmEfficiencyTool:
         print('\n---------------------------------------------------------------------------------------------End test')
 
 
+def aet_decorator(data_params):# don't need data_size. The data_params represent n, The scratchpad.populate() will take a multiplier
+    FET = AlgorithmEfficiencyTool(None)
+    if type(data_params) is dict:
+        data_params = [data_params]
+    def inner_function(function):
+        @wraps(function)
+        def wrapper(*args, **kwargs):
+            results =  FET.test_function(function, data_params)
+            FET.print_test_results([results])
+            return results
+        return wrapper
+    return inner_function

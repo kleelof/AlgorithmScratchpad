@@ -59,7 +59,7 @@ class MySingleLinkedListTests(unittest.TestCase):
         self.assertEqual(temp, self.SLL.to_list())
 
     def test_compare_algorithms(self):
-        number_of_nodes = 20000
+        number_of_nodes = 5000
         self.SLL.populate(1, {
             'number_of_nodes': number_of_nodes
         }) # can update the data_params
