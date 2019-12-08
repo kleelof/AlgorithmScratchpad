@@ -1,5 +1,5 @@
 import unittest
-from AlgorithmScratchpad import scratchpad
+from scratchpad import ScratchpadBase
 
 
 class Node:
@@ -14,7 +14,7 @@ class Node:
 '''
 
 
-class SingleLinkedListPad(scratchpad.ScratchpadBase):
+class SingleLinkedListPad(ScratchpadBase):
 
     def __init__(self):
         super().__init__()

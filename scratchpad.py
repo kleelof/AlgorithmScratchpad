@@ -1,4 +1,4 @@
-from AlgorithmScratchpad.algorithm_efficiency_tool import AlgorithmEfficiencyTestingTool, TestDataGenerator
+from algorithm_efficiency_tool.tool_class import AlgorithmEfficiencyTool, TestDataGenerator
 
 
 class ScratchpadBase:
@@ -11,4 +11,4 @@ class ScratchpadBase:
         raise NotImplementedError()
 
     def test_functions(self, functions):
-        return AlgorithmEfficiencyTestingTool(self).test_functions(functions)
+        return AlgorithmEfficiencyTool(self).test_functions(functions)

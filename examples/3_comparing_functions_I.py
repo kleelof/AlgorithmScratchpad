@@ -2,7 +2,7 @@
     How to compare functions in the same Scratchpad
 '''
 import unittest
-from AlgorithmScratchpad.pads.single_linked_list_pad import SingleLinkedListPad
+from pads.single_linked_list_pad import SingleLinkedListPad
 
 
 class MySingleLinkedList(SingleLinkedListPad):
