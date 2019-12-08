@@ -18,7 +18,7 @@ class TestDataGenerator:
             if params['fill_with'] == 'str':
                 pass
             else: # default is unsigned
-                 the_list = self.get_list_int(range(params['length'] * data_multiplier))
+                the_list = self.get_list_int(range(params['number_of_nodes'] * data_multiplier))
 
             if the_list:
                 if params['sort'] == 'random':

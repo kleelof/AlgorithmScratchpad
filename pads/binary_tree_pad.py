@@ -1,5 +1,5 @@
 import unittest
-from AlgorithmScratchpad.scratchpad import ScratchpadBase
+from scratchpad import ScratchpadBase
 
 '''
     Use this ScratchPadBase to develop and test algorithms related to Binary Trees
@@ -9,11 +9,21 @@ from AlgorithmScratchpad.scratchpad import ScratchpadBase
 
 class BinaryTreeNode(ScratchpadBase):
 
-    def __init__(self, data = -1, left = None, right = None):
-        super().__init__()
+    def __init__(self, data = -1, _data_params = None):
+
+        data_params = {
+            'type': 'list',
+            'fill_with': 'unsigned',
+            'sort': 'random'
+        }
+        if _data_params:
+            data_params.update(_data_params)
+
+        super().__init__(data_params)
+
         self.data = data
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
 
     def append(self, node):
         if node.data < self.data:
@@ -51,7 +61,7 @@ class BinaryTreeNode(ScratchpadBase):
         return BinaryTreeNode(value) # The extending class must create an instance of itself and return it
 
     # this function can be overridden to create more complex test data
-    def populate(self, data_multiplier, _params=None):
+    def populate(self, data_multiplier=1, _params=None):
         params = {
             'type': 'list'
         }

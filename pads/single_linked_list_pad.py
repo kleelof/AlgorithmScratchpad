@@ -16,9 +16,19 @@ class Node:
 
 class SingleLinkedListPad(ScratchpadBase):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, _data_params=None):
+
+        data_params = {
+            'type': 'list',
+            'fill_with': 'unsigned',
+            'sort': 'random'
+        }
+        if _data_params:
+            data_params.update(_data_params)
+
+        super().__init__(data_params)
         self.head = None
+
 
     def add_node(self, value):
         if not self.head:
@@ -49,7 +59,7 @@ class SingleLinkedListPad(ScratchpadBase):
         return _list
 
     # this function can be overridden to create more complex test data
-    def populate(self, multiplier, _params=None):
+    def populate(self, multiplier=1, _params=None):
 
         if not _params:
             _params = self.data_params

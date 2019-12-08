@@ -8,36 +8,18 @@ class AlgorithmEfficiencyTool:
         self.scratchpad = scratchpad
         self.data_generator = TestDataGenerator()
 
-    def test_function(self, function, data_params=None ):
+    def test_function(self, function, data_params=None):
 
         test_name = function.__name__
         if self.scratchpad:
             test_name = f"{self.scratchpad.__class__.__name__}.{function.__name__}"
 
         results = {'test_name': test_name}
-        print(f'Testing: {test_name}')
-        print(f'Run 1:')
+        print(f'Testing {test_name} | ')
 
-        print('Populating...')
-        if self.scratchpad:
-            self.scratchpad.populate(1)
-            data = None
-        else:
-             data = self.data_generator.generate(1, data_params)
+        for data_multiplier in range(1, 3):
+            results[f'run_{data_multiplier}'] = self._run_test(data_multiplier, function, data_params)
 
-        print('Testing...')
-        results['run_1'] = self._run_time_iteration(function, data)
-
-        print(f'Run 2:')
-        print('Populating...')
-        if self.scratchpad:
-            self.scratchpad.populate(2)
-            data = None
-        else:
-            data = self.data_generator.generate(2, data_params)
-
-        print('Testing...')
-        results['run_2'] = self._run_time_iteration(function, data)
         results['multiplier'] = round(results['run_2'] / results['run_1'])
 
         if results['multiplier'] < 3:
@@ -48,20 +30,17 @@ class AlgorithmEfficiencyTool:
 
         return results
 
-    def test_functions(self, functions):
-        results = []
-        for function in functions:
-            results.append(self.test_function(function))
-        self.print_test_results(results)
-        return results
+    def _run_test(self, data_multiplier, function, data_params):
+        print(f'Run {data_multiplier}: ')
 
-    def print_test_results(self, results):
-        print('\n---------------------------------------------------------------------------------------------\nResults:\n')
-        print(f"| {'function'.ljust(50)} | {f'Run 1: '.ljust(40)} | {f'Run 2: '.ljust(40)} | {'o_time'.ljust(15)} |")
-        for result in results:
-            print(f"| {result['test_name'].ljust(50)} | {str(result['run_1']).ljust(40)} | {str(result['run_2']).ljust(40)} | {result['o_time'].ljust(15)} |")
+        print('Populating...')
+        if data_params:
+            data = self.data_generator.generate(1, data_params)
+        else:
+            self.scratchpad.populate(1)
+            data = None
 
-    def _run_time_iteration(self, function, data=None):
+        print('Testing...')
         if data:
             start = timeit.default_timer()
             function(data)
@@ -71,3 +50,23 @@ class AlgorithmEfficiencyTool:
             function()
             end = timeit.default_timer()
         return (end - start) * 1000
+
+    def compare_functions(self, functions):
+        results = []
+        for function in functions:
+            data_params = None
+            if type(function) == dict:
+                data_params = function['data_params']
+                function = function['function']
+            results.append(self.test_function(function, data_params))
+        self.print_test_results(results)
+        return results
+
+    def print_test_results(self, results):
+        print('\n---------------------------------------------------------------------------------------------\nResults:\n')
+        print(f"| {'algorithm'.ljust(50)} | {f'Run 1: '.ljust(40)} | {f'Run 2: '.ljust(40)} | {'o_time'.ljust(15)} |")
+        for result in results:
+            print(f"| {result['test_name'].ljust(50)} | {str(result['run_1']).ljust(40)} | {str(result['run_2']).ljust(40)} | {result['o_time'].ljust(15)} |")
+        print('\n---------------------------------------------------------------------------------------------End test')
+
+
