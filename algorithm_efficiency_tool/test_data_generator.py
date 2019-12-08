@@ -7,7 +7,7 @@ class TestDataGenerator:
         params = {
             'type': 'list',
             'fill_with': 'unsigned',
-            'length': 1000,
+            'number_of_nodes': 1000,
             'sort': 'asc'
         }
         if _params:
@@ -18,6 +18,7 @@ class TestDataGenerator:
             if params['fill_with'] == 'str':
                 pass
             else: # default is unsigned
+                stop = params['number_of_nodes'] * data_multiplier
                 the_list = self.get_list_int(range(params['number_of_nodes'] * data_multiplier))
 
             if the_list:
@@ -27,10 +28,10 @@ class TestDataGenerator:
 
         elif params['type'] == 'str':
             letters = string.ascii_lowercase
-            return ''.join(random.choice(letters) for i in range(int(params['length']) * data_multiplier))
+            return ''.join(random.choice(letters) for i in range(int(params['number_of_nodes']) * data_multiplier))
 
     def get_list_int(self, get_range):
-        return [x for x in get_range]
+         return [x for x in get_range]
 
     def get_list_int_random(self, get_range):
         elements = self.get_list_int(get_range)

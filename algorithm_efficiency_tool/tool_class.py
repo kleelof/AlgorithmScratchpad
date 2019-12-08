@@ -15,7 +15,7 @@ class AlgorithmEfficiencyTool:
             test_name = f"{self.scratchpad.__class__.__name__}.{function.__name__}"
 
         results = {'test_name': test_name}
-        print(f'Testing {test_name} | ')
+        print(f'Testing {test_name}')
 
         for data_multiplier in range(1, 3):
             results[f'run_{data_multiplier}'] = self._run_test(data_multiplier, function, data_params)
@@ -35,9 +35,9 @@ class AlgorithmEfficiencyTool:
 
         print('Populating...')
         if data_params:
-            data = self.data_generator.generate(1, data_params)
+            data = self.data_generator.generate(data_multiplier, data_params)
         else:
-            self.scratchpad.populate(1)
+            self.scratchpad.populate(data_multiplier)
             data = None
 
         print('Testing...')
