@@ -77,5 +77,5 @@ class SingleLinkedListPadTest(unittest.TestCase):
         self.SLL = SingleLinkedListPad()
 
     def test_populate(self):
-        self.SLL.populate(1, {'length': 5})
-        self.assertCountEqual(self.SLL.to_list(), [0,1,2,3,4])
+        self.SLL.populate(1, {'number_of_nodes': 5})
+        self.assertCountEqual([0,1,2,3,4], self.SLL.to_list())

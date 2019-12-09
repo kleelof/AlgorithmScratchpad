@@ -4,7 +4,7 @@
     You can also use Algorithm Scratchpad to create an environment for testing algorithms that require a complex data
     structure. (binary tree, single linked lists, etc....)
 
-    Checkout the 'pads' folder for some pre-built scratchpads.
+    Checkout the 'pads' folder for some pre-built scratchpads. NOTE: The pre-built pads are intended to be inherited to create your own scratchpad.
 
     In this example, I am using the SingleLinkedListPad
 

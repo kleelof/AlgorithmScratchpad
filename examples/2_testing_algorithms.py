@@ -64,6 +64,8 @@ if __name__ == '__main__':
     reverse_string('')  # the parameter for the algorithm can be anything. It will be replaced by the aet_decorator
     reverse_list([])    # when the algorithm is executed
     print_passed_parameters('a','b')
+
+
 '''
     When you run these tests, you will see output to your terminal window that looks something like this:
     

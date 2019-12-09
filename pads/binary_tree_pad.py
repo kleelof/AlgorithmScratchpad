@@ -54,6 +54,7 @@ class BinaryTreeNode(ScratchpadBase):
         if self.right:
             self.right.to_list(_list)
         return _list
+
     '''
         The following function MUST exist in any extending classes.
     '''
@@ -62,14 +63,11 @@ class BinaryTreeNode(ScratchpadBase):
 
     # this function can be overridden to create more complex test data
     def populate(self, data_multiplier=1, _params=None):
-        params = {
-            'type': 'list'
-        }
-        if _params:
-            params.update(_params)
-        params['range'] = range(params['length'] * data_multiplier)
 
-        elements = self.data_generator.generate(params)
+        if _params:
+            self.data_params.update(_params)
+
+        elements = self.data_generator.generate(data_multiplier, self.data_params)
         self.data = elements[0]
         self.left = None
         self.right = None
@@ -85,10 +83,10 @@ class BinaryTreeTests(unittest.TestCase):
         self.root = BinaryTreeNode(10)
 
     def test_populate(self):
-        self.root.populate(1, {'length': 100})
-        self.assertEqual(len(self.root.to_list()), 100)
-        self.root.populate(3, {'length': 100})
-        self.assertEqual(len(self.root.to_list()), 300)
+        self.root.populate(1, {'number_of_nodes': 100})
+        self.assertEqual(100, len(self.root.to_list()))
+        self.root.populate(3, {'number_of_nodes': 100})
+        self.assertEqual(300, len(self.root.to_list()))
 
     def test_append_lower_value(self):
         self.root.append(self.root.generate_node(8))
@@ -97,8 +95,3 @@ class BinaryTreeTests(unittest.TestCase):
     def test_append_higher_value(self):
         self.root.append(self.root.generate_node(12))
         self.assertEqual(self.root.right.data, 12)
-
-
-
-if __name__ == '__main__':
-    unittest.main()
