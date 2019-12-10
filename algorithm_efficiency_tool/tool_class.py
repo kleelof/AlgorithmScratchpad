@@ -9,7 +9,8 @@ class AlgorithmEfficiencyTool:
         self.scratchpad = scratchpad
         self.data_generator = TestDataGenerator()
 
-    def test_function(self, function, data_params=None):
+    #todo: add ability to choose return results or output. Then aet_decorator can overriden and sent params are allowed to pass through
+    def test_function(self, function, data_params=None, return_results=True):
 
         test_name = function.__name__
         if self.scratchpad:
@@ -76,8 +77,14 @@ class AlgorithmEfficiencyTool:
         print('\n---------------------------------------------------------------------------------------------End test')
 
 
-def aet_decorator(data_params):# don't need data_size. The data_params represent n, The scratchpad.populate() will take a multiplier
+def aet_decorator(data_params, _settings=None):# don't need data_size. The data_params represent n, The scratchpad.populate() will take a multiplier
     FET = AlgorithmEfficiencyTool(None)
+    settings = {
+        'return_results': True
+    }
+    if _settings:
+        settings.update(_settings)
+
     if type(data_params) is dict:
         data_params = [data_params]
     def inner_function(function):

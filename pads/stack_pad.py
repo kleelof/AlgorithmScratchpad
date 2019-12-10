@@ -67,7 +67,7 @@ class Stack(ScratchpadBase):
             self.push(element)
 
 
-class QueueTests(unittest.TestCase):
+class StackTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.stack = Stack()
