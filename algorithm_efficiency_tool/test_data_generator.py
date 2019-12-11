@@ -1,4 +1,5 @@
 import random, string
+import exrex
 
 class TestDataGenerator:
 
@@ -9,7 +10,8 @@ class TestDataGenerator:
             'fill_with': 'unsigned',
             'number_of_nodes': 1000,
             'sort': '',
-            'length': 10
+            'length': 10,
+            'regex': '[a-z][A-Z][0-9]'
         }
         if _params:
             params.update(_params)
@@ -18,10 +20,11 @@ class TestDataGenerator:
         if params['type'] == 'list':
             the_list = None
             if params['fill_with'] == 'str':
-                the_list = [self.get_random_string(params['length']) for x in range(number_of_nodes * data_multiplier)]
-
+                the_list = [self.get_random_string(params['length'], params['regex']) for x in range(number_of_nodes * data_multiplier)]
+            elif params['fill_with'] == 'signed':
+                the_list = [x for x in range(-1, -(number_of_nodes * data_multiplier + 1), -1)]
             else: # default is unsigned
-                the_list = self.get_list_int(range(number_of_nodes * data_multiplier))
+                the_list = [x for x in range(number_of_nodes * data_multiplier)]
 
             if the_list:
                 if params['sort'] == 'random':
@@ -30,18 +33,14 @@ class TestDataGenerator:
                     the_list.sort(reverse=True)
                 elif params['sort'] == 'asc':
                     the_list.sort()
-
             return the_list
 
         elif params['type'] == 'str':
-            return self.get_random_string(number_of_nodes * data_multiplier)
+            return self.get_random_string(number_of_nodes * data_multiplier, params['regex'])
 
         else: # default is the value of type is returned. This lets the tester send a set value to be used instead.
             return params['type']
 
-    def get_list_int(self, get_range):
-         return [x for x in get_range]
-
-    def get_random_string(self, number_of_nodes):
-        letters = string.ascii_lowercase
-        return ''.join(random.choice(letters) for i in range(number_of_nodes))
+    def get_random_string(self, number_of_nodes, regex):
+        letters = exrex.getone(regex)
+        return ''.join(random.choice(exrex.getone(regex)) for i in range(number_of_nodes))

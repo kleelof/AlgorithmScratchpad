@@ -12,23 +12,16 @@ class AlgorithmEfficiencyTool:
     #todo: add ability to choose return results or output. Then aet_decorator can overriden and sent params are allowed to pass through
     def test_function(self, function, data_params=None, return_results=True):
 
-        test_name = function.__name__
-        if self.scratchpad:
-            test_name = f"{self.scratchpad.__class__.__name__}.{function.__name__}"
-
-        results = {'test_name': test_name}
-        print(f'Testing {test_name}')
+        results = {
+            'test_name': function.__name__  if not self.scratchpad else f"{self.scratchpad.__class__.__name__}.{function.__name__}"
+        }
+        print(f'Testing {results["test_name"]}')
 
         for data_multiplier in range(1, 3):
             results[f'run_{data_multiplier}'] = self._run_test(data_multiplier, function, data_params)
 
         results['multiplier'] = round(results['run_2'] / results['run_1'])
-
-        if results['multiplier'] < 3:
-            o_time = 'n'
-        else:
-            o_time = f'n{round(int(results["multiplier"]) / 2)}'
-        results['o_time'] = f'O({o_time})'
+        results['o_time'] = 'O(n)' if results['multiplier'] < 3 else f'O(n{round(int(results["multiplier"]) / 2)})'
 
         return results
 
@@ -37,9 +30,7 @@ class AlgorithmEfficiencyTool:
 
         print('Populating...')
         if data_params:
-            data = []
-            for _params in data_params:
-                data.append(self.data_generator.generate(data_multiplier, _params))
+            data = [self.data_generator.generate(data_multiplier, _params) for _params in data_params]
         else:
             self.scratchpad.populate(data_multiplier)
             data = None
@@ -78,7 +69,7 @@ class AlgorithmEfficiencyTool:
 
 
 def aet_decorator(data_params, _settings=None):# don't need data_size. The data_params represent n, The scratchpad.populate() will take a multiplier
-    FET = AlgorithmEfficiencyTool(None)
+    aet = AlgorithmEfficiencyTool(None)
     settings = {
         'return_results': True
     }
@@ -90,8 +81,8 @@ def aet_decorator(data_params, _settings=None):# don't need data_size. The data_
     def inner_function(function):
         @wraps(function)
         def wrapper(*args, **kwargs):
-            results =  FET.test_function(function, data_params)
-            FET.print_test_results([results])
+            results =  aet.test_function(function, data_params)
+            aet.print_test_results([results])
             return results
         return wrapper
     return inner_function

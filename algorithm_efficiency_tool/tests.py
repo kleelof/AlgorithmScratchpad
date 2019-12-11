@@ -43,5 +43,15 @@ class DataGeneratorTests(unittest.TestCase):
     def test_get_default(self):
         self.assertEqual('I like pizza', self.generator.generate(1, {'type': 'I like pizza'}))
 
+    def test_get_signed(self):
+        number_of_nodes = 100
+        _list = self.generator.generate(1, {
+            'type': 'list',
+            'fill_with': 'signed',
+            'number_of_nodes': number_of_nodes
+        })
+        self.assertEqual(number_of_nodes, len(_list))
+        self.assertEqual(number_of_nodes, len([x for x in _list if x < 0]))
+
 if __name__ == '__main__':
     unittest.main()
