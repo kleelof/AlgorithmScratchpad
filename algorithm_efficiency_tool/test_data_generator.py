@@ -38,6 +38,9 @@ class TestDataGenerator:
         elif params['type'] == 'str':
             return self.get_random_string(number_of_nodes * data_multiplier, params['regex'])
 
+        elif params['type'] == 'preset':
+            return params['fill_with'][data_multiplier - 1]
+
         else: # default is the value of type is returned. This lets the tester send a set value to be used instead.
             return params['type']
 

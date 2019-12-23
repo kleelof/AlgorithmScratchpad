@@ -34,6 +34,7 @@ class MySingleLinkedList(SingleLinkedListPad):
             node.next = node.next.next
             self.head.next = temp
 
+
 class MySingleLinkedListTests(unittest.TestCase):
 
     @classmethod

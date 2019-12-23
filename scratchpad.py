@@ -11,4 +11,7 @@ class ScratchpadBase:
         raise NotImplementedError()
 
     def compare_functions(self, functions):
-        return AlgorithmEfficiencyTool(self).compare_functions(functions)
+        return AlgorithmEfficiencyTool(self).compare_algorithms(functions)
+
+    def set_params(self, _params):
+        self.data_params.update(_params)

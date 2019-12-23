@@ -29,7 +29,7 @@ def reverse_list(_list):
 if __name__ == '__main__':
     number_of_nodes = 2000000
     AET = AlgorithmEfficiencyTool()
-    AET.compare_functions([
+    AET.compare_algorithms([
         {
             'function': reverse_string,
             'data_params': {
