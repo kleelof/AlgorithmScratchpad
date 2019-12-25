@@ -27,21 +27,27 @@ def reverse_list(_list):
 
 
 if __name__ == '__main__':
-    number_of_nodes = 2000000
+    number_of_nodes = 10000
     AET = AlgorithmEfficiencyTool()
     AET.compare_algorithms([
         {
             'function': reverse_string,
             'data_params': {
                                 'type': 'str',
-                                'number_of_nodes': number_of_nodes # in the case of strings, this will be the length of the string
+                                'number_of_nodes': number_of_nodes, # in the case of strings, this will be the length of the string
+                                'test_run': {
+                                    'number_of_nodes': number_of_nodes * 2
+                                }
                             }
         },
         {
             'function': reverse_list,
             'data_params': {
                 'type': 'list',
-                'number_of_nodes': number_of_nodes # In the case of lists, this is the number of elements
+                'number_of_nodes': number_of_nodes, # In the case of lists, this is the number of elements
+                'test_run': {
+                    'number_of_nodes': number_of_nodes * 2
+                }
             }
         }
     ])

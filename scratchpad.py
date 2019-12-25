@@ -7,11 +7,11 @@ class ScratchpadBase:
         self.data_generator = TestDataGenerator()
         self.data_params = data_params if data_params else {}
 
-    def populate(self, data_multiplier=1, data_params=None):
+    def populate(self, run, data_params=None):
         raise NotImplementedError()
 
-    def compare_functions(self, functions):
-        return AlgorithmEfficiencyTool(self).compare_algorithms(functions)
+    def compare_algorithms(self, algorithms):
+        return AlgorithmEfficiencyTool(self).compare_algorithms(algorithms)
 
     def set_params(self, _params):
         self.data_params.update(_params)

@@ -55,15 +55,19 @@ class StairsTests(unittest.TestCase):
             {
                 'function': top_down,
                 'data_params': {
-                    'type': 'preset',
-                    'fill_with': [20, 40]
+                    'type': 20,
+                    'test_run': {
+                        'type': 40
+                    }
                 }
             },
             {
                 'function': memoize,
                 'data_params': {
-                    'type': 'preset',
-                    'fill_with': [20, 40]
+                    'type': 20,
+                    'test_run': {
+                        'type': 40
+                    }
                 }
             }
         ])

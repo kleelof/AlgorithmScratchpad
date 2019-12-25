@@ -9,7 +9,6 @@ class AlgorithmEfficiencyTool:
         self.scratchpad = scratchpad
         self.data_generator = TestDataGenerator()
 
-    #todo: add ability to choose return results or output. Then aet_decorator can overriden and sent params are allowed to pass through
     def test_algorithm(self, function, data_params=None, print_results=False):
 
         results = {
@@ -17,8 +16,8 @@ class AlgorithmEfficiencyTool:
         }
         print(f'Testing {results["test_name"]}')
 
-        for data_multiplier in range(1, 3):
-            results[f'run_{data_multiplier}'] = self._run_test(data_multiplier, function, data_params)
+        results['run_1'] = self._run_test('control', function, data_params)
+        results['run_2'] = self._run_test('test', function, data_params)
 
         results['multiplier'] = round(results['run_2'] / results['run_1'])
         results['o_time'] = 'O(n)' if results['multiplier'] < 3 else f'O(n{round(int(results["multiplier"]) / 2)})'
@@ -27,18 +26,21 @@ class AlgorithmEfficiencyTool:
             self.print_test_results(results)
         return results
 
-    def _run_test(self, data_multiplier, function, data_params):
-        print(f'Run {data_multiplier}: ')
+    '''
+        
+    '''
+    def _run_test(self, run, function, data_params = None):
+        print(f'Run {run}: ')
 
         print('Populating...')
         if data_params:
             if type(data_params) is dict:
-                data = self.data_generator.generate(data_multiplier, data_params)
+                data = self.data_generator.generate(run, data_params)
             else:
-                data = [self.data_generator.generate(data_multiplier, _params) for _params in data_params] # handle multiple params
+                data = [self.data_generator.generate(run, _params) for _params in data_params] # handle multiple params
 
         else:
-            self.scratchpad.populate(data_multiplier)
+            self.scratchpad.populate(run)
             data = None
 
         print('Testing...')
@@ -53,16 +55,16 @@ class AlgorithmEfficiencyTool:
 
         return (end - start) * 1000
 
-    def compare_algorithms(self, functions):
+    def compare_algorithms(self, algorithms):
         results = []
-        for function in functions:
+        for algorithm in algorithms:
             data_params = None
-            if type(function) == dict:
-                data_params = function['data_params']
+            if type(algorithm) == dict:
+                data_params = algorithm['data_params']
                 if type(data_params) is dict:
                     data_params = [data_params]
-                function = function['function']
-            results.append(self.test_algorithm(function, data_params))
+                algorithm = algorithm['function']
+            results.append(self.test_algorithm(algorithm, data_params))
         self.print_test_results(results)
         return results
 

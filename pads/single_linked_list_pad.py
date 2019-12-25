@@ -59,14 +59,14 @@ class SingleLinkedListPad(ScratchpadBase):
         return _list
 
     # this function can be overridden to create more complex test data
-    def populate(self, multiplier=1, _params=None):
+    def populate(self, run, _params=None):
 
         if not _params:
             _params = self.data_params
 
         if _params:
             self.data_params.update(_params)
-        elements = self.data_generator.generate(multiplier, self.data_params)
+        elements = self.data_generator.generate(run, self.data_params)
         for value in elements:
             self.add_node(value)
 
@@ -74,8 +74,20 @@ class SingleLinkedListPad(ScratchpadBase):
 class SingleLinkedListPadTest(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.SLL = SingleLinkedListPad()
+        self.SLL = SingleLinkedListPad({
+            'type': 'list',
+            'fill_with': 'unsigned',
+            'sort': 'random',
+            'number_of_nodes': 5,
+            'test_run': {
+                'number_of_nodes': 10
+            }
+        })
 
-    def test_populate(self):
-        self.SLL.populate(1, {'number_of_nodes': 5})
-        self.assertCountEqual([0,1,2,3,4], self.SLL.to_list())
+    def test_populate_control(self):
+        self.SLL.populate('control')
+        self.assertEqual(5, len(self.SLL.to_list()))
+
+    def test_populate_test(self):
+        self.SLL.populate('test')
+        self.assertEqual(10, len(self.SLL.to_list()))

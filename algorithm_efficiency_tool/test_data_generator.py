@@ -3,7 +3,7 @@ import exrex
 
 class TestDataGenerator:
 
-    def generate(self, data_multiplier, _params=None):
+    def generate(self, run, _params=None):
 
         params = {
             'type': 'list',
@@ -15,16 +15,19 @@ class TestDataGenerator:
         }
         if _params:
             params.update(_params)
+            if run == 'test':
+                params.update(_params['test_run'])
+
         number_of_nodes = params['number_of_nodes']
 
         if params['type'] == 'list':
             the_list = None
             if params['fill_with'] == 'str':
-                the_list = [self.get_random_string(params['length'], params['regex']) for x in range(number_of_nodes * data_multiplier)]
+                the_list = [self.get_random_string(params['length'], params['regex']) for x in range(number_of_nodes)]
             elif params['fill_with'] == 'signed':
-                the_list = [x for x in range(-1, -(number_of_nodes * data_multiplier + 1), -1)]
+                the_list = [x for x in range(-1, -(number_of_nodes  + 1), -1)]
             else: # default is unsigned
-                the_list = [x for x in range(number_of_nodes * data_multiplier)]
+                the_list = [x for x in range(number_of_nodes)]
 
             if the_list:
                 if params['sort'] == 'random':
@@ -36,10 +39,10 @@ class TestDataGenerator:
             return the_list
 
         elif params['type'] == 'str':
-            return self.get_random_string(number_of_nodes * data_multiplier, params['regex'])
+            return self.get_random_string(number_of_nodes, params['regex'])
 
-        elif params['type'] == 'preset':
-            return params['fill_with'][data_multiplier - 1]
+        elif params['type'] == 'preset': #todo: deprecate
+            return params['fill_with'][0 if run == 'control' else 1]
 
         else: # default is the value of type is returned. This lets the tester send a set value to be used instead.
             return params['type']

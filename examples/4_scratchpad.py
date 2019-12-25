@@ -39,7 +39,7 @@ class MySingleLinkedListTests(unittest.TestCase):
         })
 
     def setUp(self) -> None:
-        self.SLL.populate() # rebuilds the data
+        self.SLL.populate('control') # rebuilds the data
 
     def test_reverse_list(self):
         temp = self.SLL.to_list()

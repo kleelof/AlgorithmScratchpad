@@ -29,7 +29,7 @@ def reverse_string(string):
 if __name__ == '__main__':
     TDG = TestDataGenerator()
 
-    _list = TDG.generate(1, {
+    _list = TDG.generate('control', {
         'type': 'list',
         'number_of_nodes': 5,
         'sort': 'asc'
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     reverse_list(_list)
     assert temp == _list
 
-    _string = TDG.generate(1, {
+    _string = TDG.generate('control', {
         'type': 'str',
         'length': 1000
     })

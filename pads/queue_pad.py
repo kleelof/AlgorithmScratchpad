@@ -64,11 +64,11 @@ class Queue(ScratchpadBase):
                 node = node.next
         return _list
 
-    def populate(self, data_multiplier=1, _params=None):
+    def populate(self, run, _params=None):
         if _params:
             self.data_params.update(_params)
 
-        elements = self.data_generator.generate(data_multiplier, self.data_params)
+        elements = self.data_generator.generate(run, self.data_params)
         for element in elements:
             self.enqueue(element)
 
@@ -76,13 +76,27 @@ class Queue(ScratchpadBase):
 class QueueTests(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.queue = Queue()
-        self.queue.populate(1, {'number_of_nodes': 5})
+        self.queue = Queue({
+            'type': 'list',
+            'fill_with': 'unsigned',
+            'sort': 'asc',
+            'number_of_nodes': 5,
+            'test_run': {
+                'number_of_nodes': 10
+            }
+        })
 
-    def test_populate(self):
+
+    def test_populate_control(self):
+        self.queue.populate('control')
         self.assertEqual([0,1,2,3,4], self.queue.to_list())
 
+    def test_populate_test(self):
+        self.queue.populate('test')
+        self.assertEqual([0,1,2,3,4,5,6,7,8,9], self.queue.to_list())
+
     def test_dequeue(self):
+        self.queue.populate('control')
         self.queue.dequeue()
         self.queue.dequeue()
         self.queue.dequeue()

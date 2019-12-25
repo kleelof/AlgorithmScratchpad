@@ -62,12 +62,12 @@ class BinaryTreeNode(ScratchpadBase):
         return BinaryTreeNode(value) # The extending class must create an instance of itself and return it
 
     # this function can be overridden to create more complex test data
-    def populate(self, data_multiplier=1, _params=None):
+    def populate(self, run, _params=None):
 
         if _params:
             self.data_params.update(_params)
 
-        elements = self.data_generator.generate(data_multiplier, self.data_params)
+        elements = self.data_generator.generate(run, self.data_params)
         self.data = elements[0]
         self.left = None
         self.right = None
@@ -83,10 +83,19 @@ class BinaryTreeTests(unittest.TestCase):
         self.root = BinaryTreeNode(10)
 
     def test_populate(self):
-        self.root.populate(1, {'number_of_nodes': 100})
+        self.root.set_params({
+            'type': 'list',
+            'fill_with': 'unsigned',
+            'sort': 'random',
+            'number_of_nodes': 100,
+            'test_run': {
+                'number_of_nodes': 200
+            }
+        })
+        self.root.populate('control')
         self.assertEqual(100, len(self.root.to_list()))
-        self.root.populate(3, {'number_of_nodes': 100})
-        self.assertEqual(300, len(self.root.to_list()))
+        self.root.populate('run')
+        self.assertEqual(200, len(self.root.to_list()))
 
     def test_append_lower_value(self):
         self.root.append(self.root.generate_node(8))

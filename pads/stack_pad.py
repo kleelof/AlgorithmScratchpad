@@ -33,10 +33,10 @@ class Stack(ScratchpadBase):
         if not self.head:
             return
 
-        value = self.head
+        node = self.head
         self.head = self.head.next
 
-        return value
+        return node.value
 
     def print_me(self):
         if self.head:
@@ -56,11 +56,11 @@ class Stack(ScratchpadBase):
                 node = node.next
         return _list
 
-    def populate(self, data_multiplier=1, _params=None):
+    def populate(self, run, _params=None):
         if _params:
             self.data_params.update(_params)
 
-        elements = self.data_generator.generate(data_multiplier, self.data_params)
+        elements = self.data_generator.generate(run, self.data_params)
         for element in elements:
             self.push(element)
 
@@ -68,11 +68,23 @@ class Stack(ScratchpadBase):
 class StackTests(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.stack = Stack()
+        self.stack = Stack({
+            'type': 'list',
+            'fill_with': 'unsigned',
+            'sort': 'asc',
+            'number_of_nodes': 5,
+            'test_run': {
+                'number_of_nodes': 10
+            }
+        })
 
-    def test_populate(self):
-        self.stack.populate(1, {'number_of_nodes': 5})
-        self.assertEqual([4,3,2,1,0], self.stack.to_list())
+    def test_populate_control(self):
+        self.stack.populate('control')
+        self.assertEqual(5, len(self.stack.to_list()))
+
+    def test_populate_test(self):
+        self.stack.populate('test')
+        self.assertEqual(10, len(self.stack.to_list()))
 
     def test_push_pop(self):
         self.stack.push('a')

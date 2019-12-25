@@ -5,8 +5,10 @@ from algorithm_efficiency_tool.tool_class import aet_decorator, AlgorithmEfficie
 
 ''' Technique 1. Build a 'starter' function that uses the AET decorator '''
 @aet_decorator({
-                    'type': 'preset',
-                    'fill_with': [100, 200]
+                    'type': 100,
+                    'test_run': {
+                        'type': 200
+                    }
                 })
 def start_staircase_algorithm(steps):
     return staircase_algorithm(steps)
@@ -35,8 +37,10 @@ if __name__ == '__main__':
     ''' technique 2, use the AET directly '''
     AlgorithmEfficiencyTool().test_algorithm(staircase_algorithm,
                        [{
-                            'type': 'preset',
-                            'fill_with': [100, 200]
+                            'type': 200,
+                            'test_run': {
+                                'type': 400
+                            }
                         }],
                        True
                        )

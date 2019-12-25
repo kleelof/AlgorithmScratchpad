@@ -21,7 +21,10 @@ from algorithm_efficiency_tool.tool_class import aet_decorator
 # single paramater algorithms: data_params = {}
 @aet_decorator(data_params={
     'type': 'str',
-    'number_of_nodes': 100000
+    'number_of_nodes': 100000,
+    'test_run': {
+        'number_of_nodes': 200000
+    }
 })
 def reverse_string(string):
     letters = list(string)
@@ -34,7 +37,10 @@ def reverse_string(string):
 
 @aet_decorator(data_params={
     'type': 'list',
-    'number_of_nodes': 100000
+    'number_of_nodes': 10000,
+    'test_run': {
+            'number_of_nodes': 20000
+        }
 })
 def reverse_list(_list):
     for i in range(int(len(_list) / 2)):
@@ -47,21 +53,29 @@ def reverse_list(_list):
 @aet_decorator(data_params=[
     {
         'type': 'str',
-        'number_of_nodes': 8
+        'number_of_nodes': 100,
+        'test_run': {
+            'number_of_nodes': 100
+        }
     },
     {
         'type': 'str',
-        'number_of_nodes': 150
+        'number_of_nodes': 200,
+        'test_run': {
+            'number_of_nodes': 200
+        }
     }
 ])
 def print_passed_parameters(string1, string2):
-    print(f'{string1} : {string2}')
+    for i in range(len(string1)):
+        for j in range(len(string2)):
+            pass
 
 
 if __name__ == '__main__':
     # both of these algorithms were tested in part one, so  we will skip testing for this.
 
-    reverse_string('')  # the parameter for the algorithm can be anything. It will be replaced by the aet_decorator
+    reverse_string('') # the parameter for the algorithm can be anything. It will be replaced by the aet_decorator
     reverse_list([])    # when the algorithm is executed
     print_passed_parameters('a','b')
 
