@@ -15,7 +15,7 @@ class TestDataGenerator:
         }
         if _params:
             params.update(_params)
-            if run == 'test':
+            if run == 'test' and 'test_run' in _params:
                 params.update(_params['test_run'])
 
         number_of_nodes = params['number_of_nodes']
