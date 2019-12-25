@@ -27,17 +27,15 @@ class Stack(ScratchpadBase):
         if not self.head:
             self.head = StackNode(value)
         else:
-            new_node = StackNode(value, self.head)
-            self.head = new_node
+            self.head = StackNode(value, self.head)
 
     def pop(self):
         if not self.head:
             return
 
         value = self.head
+        self.head = self.head.next
 
-        if self.head.next:
-            self.head = self.head.next
         return value
 
     def print_me(self):
@@ -75,4 +73,11 @@ class StackTests(unittest.TestCase):
     def test_populate(self):
         self.stack.populate(1, {'number_of_nodes': 5})
         self.assertEqual([4,3,2,1,0], self.stack.to_list())
+
+    def test_push_pop(self):
+        self.stack.push('a')
+        self.stack.push('b')
+        self.assertEqual('b', self.stack.pop())
+        self.assertEqual('a', self.stack.pop())
+
 
