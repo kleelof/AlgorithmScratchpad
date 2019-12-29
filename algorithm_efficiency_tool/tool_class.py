@@ -1,4 +1,4 @@
-import timeit
+import timeit, math
 from functools import wraps
 from algorithm_efficiency_tool.test_data_generator import TestDataGenerator
 
@@ -20,7 +20,8 @@ class AlgorithmEfficiencyTool:
         results['run_2'] = self._run_test('test', function, data_params)
 
         results['multiplier'] = round(results['run_2'] / results['run_1'])
-        results['o_time'] = 'O(n)' if results['multiplier'] < 3 else f'O(n{round(int(results["multiplier"]) / 2)})'
+        print(f'Multiplier: {results["multiplier"]}')
+        results['o_time'] = 'O(n)' if results['multiplier'] < 2 else f'O(n{results["multiplier"]})'
 
         if print_results:
             self.print_test_results(results)
