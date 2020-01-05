@@ -1,3 +1,6 @@
+'''
+    Animation: https://www.youtube.com/watch?v=MtQL_ll5KhQ
+'''
 from algorithm_efficiency_tool.tool_class import aet_decorator
 
 @aet_decorator(data_params={
@@ -32,7 +35,6 @@ def heapify(arr, heap_size, root_index):
 
     if largest != root_index:
         arr[root_index], arr[largest] = arr[largest], arr[root_index]
-        # Heapify the new root element to ensure it's the largest
         heapify(arr, heap_size, largest)
 
 if __name__ == '__main__':
