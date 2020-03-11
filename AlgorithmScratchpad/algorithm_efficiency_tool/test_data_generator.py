@@ -48,5 +48,4 @@ class TestDataGenerator:
             return params['type']
 
     def get_random_string(self, number_of_nodes, regex):
-        letters = exrex.getone(regex)
         return ''.join(random.choice(exrex.getone(regex)) for i in range(number_of_nodes))

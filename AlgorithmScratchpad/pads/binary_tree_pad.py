@@ -1,5 +1,5 @@
 import unittest
-from scratchpad import ScratchpadBase
+from AlgorithmScratchpad.scratchpad import ScratchpadBase
 
 '''
     Use this ScratchPadBase to develop and test algorithms related to Binary Trees

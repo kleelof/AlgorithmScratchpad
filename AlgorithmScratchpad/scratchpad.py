@@ -1,4 +1,5 @@
-from algorithm_efficiency_tool.tool_class import AlgorithmEfficiencyTool, TestDataGenerator
+
+from AlgorithmScratchpad.algorithm_efficiency_tool.tool_class import AlgorithmEfficiencyTool, TestDataGenerator
 
 
 class ScratchpadBase:

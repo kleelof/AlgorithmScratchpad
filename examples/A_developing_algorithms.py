@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../')
+sys.path.insert(0, './')
 
 '''
     Algorithm Scratchpad is designed to assist in developing and testing algorithms.
@@ -10,7 +10,7 @@ sys.path.append('../')
     complex algorithms(those that require multiple parameters).
 
 '''
-from algorithm_efficiency_tool.tool_class import TestDataGenerator
+from AlgorithmScratchPad.algorithm_efficiency_tool.test_data_generator import TestDataGenerator
 
 
 def reverse_list(_list):

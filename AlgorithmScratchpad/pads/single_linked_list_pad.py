@@ -1,5 +1,5 @@
 import unittest
-from scratchpad import ScratchpadBase
+from AlgorithmScratchpad.scratchpad import ScratchpadBase
 
 
 class Node:

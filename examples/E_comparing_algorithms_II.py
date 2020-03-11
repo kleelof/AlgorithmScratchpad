@@ -1,12 +1,12 @@
 import sys
-sys.path.append('../')
+sys.path.append('./')
 
 '''
     In the example Comparing Algorithms, we saw how to test 2 simple algorithms. In this example, we will look at how
     to test algorithms in the same sketchpad
 '''
 import unittest
-from pads.single_linked_list_pad import SingleLinkedListPad
+from AlgorithmScratchPad.pads.single_linked_list_pad import SingleLinkedListPad
 
 
 class MySingleLinkedList(SingleLinkedListPad):

@@ -1,5 +1,6 @@
-from scratchpad import ScratchpadBase
+
 from string import ascii_lowercase
+from AlgorithmScratchpad.scratchpad import ScratchpadBase
 
 class TriePad(ScratchpadBase):
     def __init__(self):

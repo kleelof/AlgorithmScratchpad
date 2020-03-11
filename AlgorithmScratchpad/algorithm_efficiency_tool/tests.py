@@ -1,5 +1,8 @@
+import sys
+sys.path.insert(0, './')
+
 import unittest
-from algorithm_efficiency_tool.test_data_generator import TestDataGenerator
+from AlgorithmScratchpad.algorithm_efficiency_tool.test_data_generator import TestDataGenerator
 
 
 class DataGeneratorTests(unittest.TestCase):

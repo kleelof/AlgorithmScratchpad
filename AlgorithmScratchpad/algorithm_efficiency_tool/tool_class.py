@@ -1,6 +1,6 @@
 import timeit, math
 from functools import wraps
-from algorithm_efficiency_tool.test_data_generator import TestDataGenerator
+from AlgorithmScratchpad.algorithm_efficiency_tool.test_data_generator import TestDataGenerator
 
 
 class AlgorithmEfficiencyTool:

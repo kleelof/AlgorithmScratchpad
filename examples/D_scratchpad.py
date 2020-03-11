@@ -4,16 +4,16 @@
     You can also use Algorithm Scratchpad to create an environment for testing algorithms that require a complex data
     structure. (binary tree, single linked lists, etc....)
 
-    Checkout the 'pads' folder for some pre-built scratchpads. NOTE: The pre-built pads are intended to be inherited to create your own scratchpad.
+    Checkout the 'pads' folder for some pre-built scratchpads.
 
     In this example, I am using the SingleLinkedListPad
 
 '''
 import sys
-sys.path.append('../')
+sys.path.append('./')
 
 import unittest
-from pads.single_linked_list_pad import SingleLinkedListPad
+from AlgorithmScratchPad.pads.single_linked_list_pad import SingleLinkedListPad
 
 
 class MySingleLinkedList(SingleLinkedListPad):
