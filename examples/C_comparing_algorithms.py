@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 '''
     So far, we've seen how you can create test data for your algorithms as well as test efficiency using the aet_decorator.
 

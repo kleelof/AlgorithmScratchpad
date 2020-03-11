@@ -9,6 +9,9 @@
     In this example, I am using the SingleLinkedListPad
 
 '''
+import sys
+sys.path.append('../')
+
 import unittest
 from pads.single_linked_list_pad import SingleLinkedListPad
 
@@ -29,20 +32,3 @@ class MySingleLinkedList(SingleLinkedListPad):
         self.head = node
         node.next = last_node
 
-
-class MySingleLinkedListTests(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.SLL = MySingleLinkedList({
-            'number_of_nodes': 100
-        })
-
-    def setUp(self) -> None:
-        self.SLL.populate('control') # rebuilds the data
-
-    def test_reverse_list(self):
-        temp = self.SLL.to_list()
-        temp.reverse()
-        self.SLL.reverse_list()
-        self.assertEqual(temp, self.SLL.to_list())

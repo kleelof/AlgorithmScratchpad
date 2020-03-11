@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../')
+
 '''
     At the core of Algorithm Scratchpad is the AlgorithmEfficiencyTool(AET). Using AET and it's available decorator,
     aet_decorator, you can easily test any algorithm or compare 2 or more algorithms.

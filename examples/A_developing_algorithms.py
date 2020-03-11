@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../')
+
 '''
     Algorithm Scratchpad is designed to assist in developing and testing algorithms.
 
@@ -26,22 +29,21 @@ def reverse_string(string):
     return ''.join(letters)
 
 
-if __name__ == '__main__':
-    TDG = TestDataGenerator()
+TDG = TestDataGenerator()
 
-    _list = TDG.generate('control', {
-        'type': 'list',
-        'number_of_nodes': 5,
-        'sort': 'asc'
-    })
-    temp = _list[::-1] # get reversed copy of list for testing against algorithm results
-    reverse_list(_list)
-    assert temp == _list
+_list = TDG.generate('control', {
+    'type': 'list',
+    'number_of_nodes': 5,
+    'sort': 'asc'
+})
+temp = _list[::-1] # get reversed copy of list for testing against algorithm results
+reverse_list(_list)
+assert temp == _list
 
-    _string = TDG.generate('control', {
-        'type': 'str',
-        'length': 1000
-    })
-    temp = _string[::-1]
-    assert temp == reverse_string(_string)
+_string = TDG.generate('control', {
+    'type': 'str',
+    'length': 1000
+})
+temp = _string[::-1]
+assert temp == reverse_string(_string)
 

@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../')
+
 '''
     In the example Comparing Algorithms, we saw how to test 2 simple algorithms. In this example, we will look at how
     to test algorithms in the same sketchpad
@@ -35,36 +38,14 @@ class MySingleLinkedList(SingleLinkedListPad):
             self.head.next = temp
 
 
-class MySingleLinkedListTests(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.SLL = MySingleLinkedList({
+SLL = MySingleLinkedList({
             'number_of_nodes': 200,
             'test_run': {
                 'number_of_nodes': 400
             }
         })
-
-    def setUp(self) -> None:
-        self.SLL.populate('control')  # rebuilds the data
-
-    def test_reverse_list(self):
-        temp = self.SLL.to_list()  # get current list order
-        temp.reverse()  # reverse it for the upcoming assert
-        self.SLL.reverse_list()  # perform action
-        self.assertEqual(temp, self.SLL.to_list())
-
-    def test_reverse_list_2(self):
-        temp = self.SLL.to_list()  # get current list order
-        temp.reverse()  # reverse it for the upcoming assert
-        self.SLL.reverse_list_2()  # perform action
-        self.assertEqual(temp, self.SLL.to_list())
-
-    def test_compare_algorithms(self):
-        self.SLL.compare_algorithms([
-                                    self.SLL.reverse_list,
-                                    self.SLL.reverse_list_2
+SLL.compare_algorithms([
+                                    SLL.reverse_list,
+                                    SLL.reverse_list_2
                                    ])  # NOTICE: The function names do not have the parenthesis. Just the function name
-
 
