@@ -1,7 +1,11 @@
+import sys
+sys.path.insert(0, './')
+
 '''
     This example demonstrates how to preset the data you want to use for each individual run.
 '''
-from algorithm_efficiency_tool.tool_class import aet_decorator, AlgorithmEfficiencyTool
+
+from AlgorithmScratchpad.algorithm_efficiency_tool.tool_class import aet_decorator, AlgorithmEfficiencyTool
 
 ''' Technique 1. Build a 'starter' function that uses the AET decorator '''
 @aet_decorator({
@@ -30,17 +34,16 @@ def staircase_algorithm(steps, memo = None):
     return memo[steps]
 
 
-if __name__ == '__main__':
-    ''' Call the trigger function for technique 1 '''
-    start_staircase_algorithm(10) # it does not matter what value you put here. AET will replace it with test data.
+''' Call the trigger function for technique 1 '''
+start_staircase_algorithm(10) # it does not matter what value you put here. AET will replace it with test data.
 
-    ''' technique 2, use the AET directly '''
-    AlgorithmEfficiencyTool().test_algorithm(staircase_algorithm,
-                       [{
-                            'type': 200,
-                            'test_run': {
-                                'type': 400
-                            }
-                        }],
-                       True
-                       )
+''' technique 2, use the AET directly '''
+AlgorithmEfficiencyTool().test_algorithm(staircase_algorithm,
+                    [{
+                        'type': 200,
+                        'test_run': {
+                            'type': 400
+                        }
+                    }],
+                    True
+                    )

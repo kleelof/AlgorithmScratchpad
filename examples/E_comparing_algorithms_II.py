@@ -6,7 +6,7 @@ sys.path.append('./')
     to test algorithms in the same sketchpad
 '''
 import unittest
-from AlgorithmScratchPad.pads.single_linked_list_pad import SingleLinkedListPad
+from AlgorithmScratchpad.pads.single_linked_list_pad import SingleLinkedListPad
 
 
 class MySingleLinkedList(SingleLinkedListPad):

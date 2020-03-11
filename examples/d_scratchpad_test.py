@@ -1,5 +1,8 @@
+import sys
+sys.path.insert(0, './')
+
 import unittest
-from D_scratchpad import MySingleLinkedList
+from examples.D_scratchpad import MySingleLinkedList
 
 class MySingleLinkedListTests(unittest.TestCase):
 

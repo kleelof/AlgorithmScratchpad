@@ -9,12 +9,8 @@
     In this example, I am using the SingleLinkedListPad
 
 '''
-import sys
-sys.path.append('./')
-
 import unittest
-from AlgorithmScratchPad.pads.single_linked_list_pad import SingleLinkedListPad
-
+from AlgorithmScratchpad.pads.single_linked_list_pad import SingleLinkedListPad
 
 class MySingleLinkedList(SingleLinkedListPad):
 

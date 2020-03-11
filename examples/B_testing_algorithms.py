@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../')
+sys.path.append('./')
 
 '''
     At the core of Algorithm Scratchpad is the AlgorithmEfficiencyTool(AET). Using AET and it's available decorator,
@@ -19,7 +19,7 @@ sys.path.append('../')
             be useful for getting an accurate result within a tolerable amount of time.
 
 '''
-from algorithm_efficiency_tool.tool_class import aet_decorator
+from AlgorithmScratchpad.algorithm_efficiency_tool.tool_class import aet_decorator
 
 # single paramater algorithms: data_params = {}
 @aet_decorator(data_params={

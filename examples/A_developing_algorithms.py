@@ -6,11 +6,11 @@ sys.path.insert(0, './')
 
     Below are examples of how to generate different types of test data for simple algorithms.
 
-    Here, 'simple algorithm' just means the algorithm needs only 1 parameter. Later I will cover how to setup
-    complex algorithms(those that require multiple parameters).
+    Here, 'simple algorithm' just means the algorithm needs only 1 parameter. Later I will cover how to setup more
+    complex algorithms.
 
 '''
-from AlgorithmScratchPad.algorithm_efficiency_tool.test_data_generator import TestDataGenerator
+from AlgorithmScratchpad.algorithm_efficiency_tool.test_data_generator import TestDataGenerator
 
 
 def reverse_list(_list):

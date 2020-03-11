@@ -1,5 +1,6 @@
 import sys
-sys.path.append('../')
+sys.path.append('./')
+
 '''
     So far, we've seen how you can create test data for your algorithms as well as test efficiency using the aet_decorator.
 
@@ -9,7 +10,7 @@ sys.path.append('../')
     one suggested by an instructor or website was the faster or more efficient algorithm.
 
 '''
-from algorithm_efficiency_tool.tool_class import AlgorithmEfficiencyTool
+from AlgorithmScratchpad.algorithm_efficiency_tool.tool_class import AlgorithmEfficiencyTool
 
 def reverse_string(string):
     letters = list(string)
@@ -28,28 +29,27 @@ def reverse_list(_list):
     return _list
 
 
-if __name__ == '__main__':
-    number_of_nodes = 10000
-    AET = AlgorithmEfficiencyTool()
-    AET.compare_algorithms([
-        {
-            'function': reverse_string,
-            'data_params': {
-                                'type': 'str',
-                                'number_of_nodes': number_of_nodes, # in the case of strings, this will be the length of the string
-                                'test_run': {
-                                    'number_of_nodes': number_of_nodes * 2
-                                }
+number_of_nodes = 10000
+AET = AlgorithmEfficiencyTool()
+AET.compare_algorithms([
+    {
+        'function': reverse_string,
+        'data_params': {
+                            'type': 'str',
+                            'number_of_nodes': number_of_nodes, # in the case of strings, this will be the length of the string
+                            'test_run': {
+                                'number_of_nodes': number_of_nodes * 2
                             }
-        },
-        {
-            'function': reverse_list,
-            'data_params': {
-                'type': 'list',
-                'number_of_nodes': number_of_nodes, # In the case of lists, this is the number of elements
-                'test_run': {
-                    'number_of_nodes': number_of_nodes * 2
-                }
+                        }
+    },
+    {
+        'function': reverse_list,
+        'data_params': {
+            'type': 'list',
+            'number_of_nodes': number_of_nodes, # In the case of lists, this is the number of elements
+            'test_run': {
+                'number_of_nodes': number_of_nodes * 2
             }
         }
-    ])
+    }
+])

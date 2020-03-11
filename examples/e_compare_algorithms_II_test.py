@@ -1,5 +1,8 @@
+import sys
+sys.path.insert(0, './')
+
 import unittest
-from E_comparing_algorithms_II import MySingleLinkedList
+from examples.E_comparing_algorithms_II import MySingleLinkedList
 
 class MySingleLinkedListTests(unittest.TestCase):
 
